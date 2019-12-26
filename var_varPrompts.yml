@@ -1,0 +1,23 @@
+---
+
+- hosts: all
+  vars_prompt:
+  - name: dirName
+    prompt: Directory Name you want to create? 
+    private: no
+    default: "mydir"
+
+  vars:
+    principle: 10000
+    interest: 10
+    tenure: 60
+
+  tasks:
+  - name: The entered prompt value
+    debug:
+      var: dirName
+
+
+  - name: Print Simple Interest
+    debug:
+      var: "{{ principle * interest * tenure / 100 }}"

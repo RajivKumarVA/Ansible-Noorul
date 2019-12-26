@@ -1,0 +1,33 @@
+# Example that prints the loopback address and gateway for each host
+#
+- hosts: all
+  tasks:
+        
+  - name: Print system UUID details
+    debug:
+     msg: System {{ inventory_hostname }} has uuid {{ ansible_product_uuid }}
+
+  - name: Print system gateway information only when defined
+    debug:
+     msg: System {{ inventory_hostname }} has gateway {{ ansible_default_ipv4.gateway }}
+    when: ansible_default_ipv4.gateway is defined
+
+# Example that prints return information from the previous task
+  - name: Runs shell command "uptime" and "Stores the output information such as stdin, stdout, command run time, etc"
+    shell: /usr/bin/uptime
+    register: result
+
+  - debug:
+     var: result.cmd,result.stdout,result.start,result.end
+
+  - name: Display all variables/facts known for a host
+    debug:
+     var: hostvars[inventory_hostname]
+     verbosity: 3
+ 
+# Example that prints messages, but only if there is an environment value set
+  - name: Prints only if env var is set
+    debug:
+     msg:
+      - "Provisioning based on YOUR_KEY which is: {{ lookup('env', 'YOUR_KEY') }}"
+      - "All lines are executed, Bye!!"

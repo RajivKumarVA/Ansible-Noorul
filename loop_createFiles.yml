@@ -1,0 +1,12 @@
+- hosts: all
+  tasks:
+  - name: Create 3 Files using Ansible Loop
+    file:
+      mode: 0522
+      path: /home/ubuntu/{{ item }}
+      state: touch
+    with_items:
+    - file1.txt
+    - file2.txt
+    - file3.txt
+

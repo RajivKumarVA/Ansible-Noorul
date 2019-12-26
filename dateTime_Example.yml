@@ -1,0 +1,21 @@
+---
+- hosts: all
+  gather_facts: yes
+
+  tasks:
+   - name: Display Current Date
+     debug:
+      msg: "The current date is {{ ansible_date_time.date }}"
+
+   - name: Display all setup ansible facts #Before the tasks are run, playbook facts are collected for localhost
+     debug:
+      var: ansible_date_time
+
+   - name: Display Current Time
+     debug:
+      msg: "The current time is {{ ansible_date_time.time }}"
+
+   - name: Create a file with current time # mostly used in logger purposes
+     file:
+      path: /home/ubuntu/ansible_log_{{ ansible_date_time.time }}
+      state: touch

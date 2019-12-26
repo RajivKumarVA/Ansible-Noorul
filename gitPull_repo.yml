@@ -1,0 +1,11 @@
+---
+
+- hosts: all
+  become: true
+  tasks:
+
+  - name: git pull a repository
+    git:
+     repo: https://github.com/RajivKumarVA/Ansible-Rajiv.git 
+     dest: /tmp/repoByAns
+     update: yes

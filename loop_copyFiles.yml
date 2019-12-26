@@ -1,0 +1,10 @@
+- hosts: all
+  tasks:
+  - name: Copies 3 Files using Ansible Loop
+    copy:
+     remote_src: yes
+     src: "{{ item.src }}"
+     dest: "{{ item.dest }}"
+    with_items:
+    - { src: /home/ubuntu/file2.txt, dest: /home/ubuntu/dirByAnsible/ }
+    - { src: /home/ubuntu/file3.txt, dest: /home/ubuntu/dirByAnsible/ }

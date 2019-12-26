@@ -1,0 +1,16 @@
+---
+
+- hosts: all
+  tasks:
+  - name: Archiving jenkins remoting files to zip
+    archive:
+      path: /home/ubuntu/jenkins/
+      dest: /home/ubuntu/jenkins/jenkins.zip
+      format: zip
+
+
+  - name: Unzipping the zipped file
+    unarchive:
+      src: /home/ubuntu/jenkins/jenkins.zip
+      dest: /home/ubuntu/remoting/
+      remote_src: yes

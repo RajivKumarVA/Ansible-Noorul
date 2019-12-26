@@ -1,0 +1,12 @@
+--- 
+- hosts: all 
+  tasks:
+  
+  - name: Check if file exists or not 
+    stat:
+      path: /home/ubuntu/decodingdevops.txt
+    register: result
+ 
+  - name: Copy using "command" module if file exists else skip 
+    command: cp /home/ubuntu/file4.txt /home/ubuntu/dirByAnsible/
+    when: result.stat.exists

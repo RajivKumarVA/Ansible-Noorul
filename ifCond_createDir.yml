@@ -1,0 +1,24 @@
+---
+- hosts: all 
+  gather_facts: no
+ 
+  tasks:
+  - name: check directory if exists.
+    stat:
+     path: /home/ubuntu/devops
+    register: my_folder
+ 
+  - name: echo if directory already existed
+    when: my_folder.stat.exists
+    debug:
+      msg: "the devops directory is already existed"
+ 
+  - name: Create directory if not exists
+    when: my_folder.stat.exists == false
+    file:
+     path: /home/ubuntu/devops
+     state: directory
+     mode: 0755
+     group: ubuntu
+     owner: ubuntu
+...

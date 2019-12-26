@@ -1,0 +1,28 @@
+- hosts: all
+  tasks:
+
+  - name: Create a directory
+    file:
+      path: /home/ubuntu/dirByAnsible
+      state: directory 
+
+  - name: Create a file
+    file:
+      path: /home/ubuntu/myfile.txt
+      state: touch
+      
+  - name: Copy the file to directory created
+    copy:
+      remote_src: yes
+      src: /home/ubuntu/myfile.txt
+      dest: /home/ubuntu/dirByAnsible/ 
+
+  - name: Deletes a file
+    file:
+      path: /home/ubuntu/myfile.txt
+      state: absent
+     
+  - name: Inserts content to the file
+    copy:
+      content: "Welcome to Ansible \n" 
+      dest: /home/ubuntu/dirByAnsible/myfile.txt
